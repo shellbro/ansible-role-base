@@ -20,7 +20,7 @@
     regexp: "^#root:"
     backrefs: yes
   notify:
-    - newaliases
+    - run newaliases
 - name: configure yum-cron
   lineinfile:
     dest: /etc/yum/yum-cron.conf

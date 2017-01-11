@@ -1,5 +1,5 @@
 ---
-- name: newaliases
+- name: run newaliases
   command: /usr/bin/newaliases
 - name: restart yum-cron
   service:
