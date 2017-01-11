@@ -1,0 +1,35 @@
+---
+- name: install software in Fedora
+  dnf:
+    name: yum-cron
+    state: present
+  when: ansible_distribution == "Fedora"
+- name: install software in CentOS
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bash-completion
+    - mailx
+    - yum-cron
+  when: ansible_distribution =="CentOS"
+- name: configure aliases
+  lineinfile:
+    dest: /etc/aliases
+    line: "root:           {{ admin_email_address }}"
+    regexp: "^#root:"
+    backrefs: yes
+  notify:
+    - newaliases
+- name: configure yum-cron
+  lineinfile:
+    dest: /etc/yum/yum-cron.conf
+    line: emit_via = email
+    regexp: ^emit_via = stdio$
+    backrefs: yes
+  notify:
+    - restart yum-cron
+- name: start yum-cron
+  service:
+    name: yum-cron
+    state: started

@@ -1,0 +1,7 @@
+---
+- name: newaliases
+  command: /usr/bin/newaliases
+- name: restart yum-cron
+  service:
+    name: yum-cron
+    state: restarted
