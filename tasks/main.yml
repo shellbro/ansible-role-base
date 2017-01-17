@@ -33,3 +33,7 @@
   service:
     name: yum-cron
     state: started
+- name: copy .toprc
+  copy:
+    src: .toprc
+    dest: /root/
