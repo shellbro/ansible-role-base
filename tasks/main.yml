@@ -1,27 +1,5 @@
 ---
-- name: install software in Fedora
-  dnf:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - postfix
-    - yum-cron
-  when: ansible_distribution == "Fedora"
-- name: install software in CentOS
-  yum:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - bash-completion
-    - mailx
-    - yum-cron
-  when: ansible_distribution =="CentOS"
-- name: launch Postfix in Fedora
-  service:
-    name: postfix
-    state: started
-    enabled: yes
-  when: ansible_distribution == "Fedora"
+- include: install-{{ ansible_distribution | lower }}.yml
 - name: configure aliases
   lineinfile:
     dest: /etc/aliases

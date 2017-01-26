@@ -1,2 +1,3 @@
 # ansible-role-common
-Ansible role that provides base configuration for Fedora and CentOS 7.
+
+Ansible role that provides base configuration for Fedora and CentOS.
