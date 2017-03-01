@@ -6,7 +6,7 @@
   with_items:
     - postfix
     - yum-cron
-- name: configure Postfix service
+- name: start postfix
   service:
     name: postfix
     state: started

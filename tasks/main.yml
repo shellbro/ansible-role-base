@@ -16,10 +16,14 @@
     backrefs: yes
   notify:
     - restart yum-cron
-- name: start yum-cron
+- name: start services
   service:
-    name: yum-cron
+    name: "{{ item }}"
     state: started
+    enabled: yes
+  with_items:
+    - firewalld
+    - yum-cron
 - name: copy .toprc
   copy:
     src: .toprc
