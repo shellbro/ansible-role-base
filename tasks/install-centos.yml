@@ -1,0 +1,11 @@
+---
+- name: install required software
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bash-completion
+    - firewalld
+    - mailx
+    - yum-cron
+  become: yes
