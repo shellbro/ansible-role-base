@@ -29,7 +29,7 @@ Example Playbook
            shell_accounts: 
            - login: jsmith
              supplementary_groups: wheel
-           admin_email: john.smith@example.com
+           admin_email: admin@example.com
 
 License
 -------
