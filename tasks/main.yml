@@ -1,2 +1,41 @@
 ---
-# tasks file for ansible-role-common
+- include: install-{{ ansible_distribution | lower }}.yml
+- name: set hostname
+  hostname:
+    name: "{{ hostname }}"
+  become: yes
+- name: set up user accounts
+  user:
+    name: "{{ item.login }}"
+    groups: "{{ item.supplementary_groups }}"
+    state: present
+  with_items: "{{ shell_accounts }}"
+  become: yes
+- name: configure aliases
+  lineinfile:
+    dest: /etc/aliases
+    line: "root:           {{ admin_email }}"
+    regexp: "^#root:"
+    backrefs: yes
+  notify:
+    - run newaliases
+  become: yes
+- name: configure yum-cron
+  lineinfile:
+    dest: /etc/yum/yum-cron.conf
+    line: emit_via = email
+    regexp: ^emit_via = stdio$
+    backrefs: yes
+  notify:
+    - restart yum-cron
+  become: yes
+- name: start services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - firewalld
+    - postfix
+    - yum-cron
+  become: yes

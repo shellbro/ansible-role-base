@@ -1,2 +1,9 @@
 ---
-# handlers file for ansible-role-common
+- name: run newaliases
+  command: /usr/bin/newaliases
+  become: yes
+- name: restart yum-cron
+  service:
+    name: yum-cron
+    state: restarted
+  become: yes
