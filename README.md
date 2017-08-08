@@ -6,7 +6,7 @@ Ansible role that provides base configuration for Fedora and CentOS.
 Requirements
 ------------
 
-None
+Ansible version >= 2.0.
 
 Role Variables
 --------------
