@@ -1,5 +1,19 @@
 ---
-- include: install-{{ ansible_distribution | lower }}.yml
+- name: install required software
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bash-completion
+    - emacs
+    - firewalld
+    - iftop
+    - iotop
+    - mailx
+    - postfix
+    - tree
+    - yum-cron
+  become: yes
 - name: set hostname
   hostname:
     name: "{{ hostname }}"
