@@ -1,4 +1,4 @@
-Role Name
+common
 =========
 
 Ansible role that provides base configuration for Fedora and CentOS.
@@ -14,6 +14,7 @@ Role Variables
 - hostname (defaults to {{ inventory_hostname }})
 - shell_accounts (by default empty list)
 - admin_email
+- auto_update (by default no)
 
 Dependencies
 ------------

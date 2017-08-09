@@ -34,7 +34,7 @@
   notify:
     - run newaliases
   become: yes
-- name: configure yum-cron
+- name: configure yum-cron notifications
   lineinfile:
     dest: /etc/yum/yum-cron.conf
     line: emit_via = email
@@ -42,6 +42,16 @@
     backrefs: yes
   notify:
     - restart yum-cron
+  become: yes
+- name: configure yum-cron auto-update
+  lineinfile:
+    dest: /etc/yum/yum-cron.conf
+    line: apply_updates = yes
+    regexp: ^apply_updates = no$
+    backrefs: yes
+  notify:
+    - restart yum-cron
+  when: auto_update
   become: yes
 - name: start services
   service:

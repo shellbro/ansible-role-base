@@ -6,3 +6,4 @@
       - login: jsmith
         supplementary_groups: wheel
       admin_email: admin@example.com
+      auto_update: yes
