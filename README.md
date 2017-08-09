@@ -27,10 +27,12 @@ Example Playbook
     - hosts: servers
       roles:
          - role: shellbro.common
-           shell_accounts: 
+           hostname: example.com
+           shell_accounts:
            - login: jsmith
              supplementary_groups: wheel
            admin_email: admin@example.com
+           auto_update: yes
 
 License
 -------
