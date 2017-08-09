@@ -2,6 +2,7 @@
 - hosts: all
   roles:
     - role: shellbro.common
+      hostname: example.com
       shell_accounts: 
       - login: jsmith
         supplementary_groups: wheel
