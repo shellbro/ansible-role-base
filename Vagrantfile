@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
     fedora.vm.provision "shell" do |s|
       s.inline = "dnf -y install python python2-dnf libselinux-python"
     end
+    fedora.vm.synced_folder ".", "/vagrant", disabled: true
   end
 
   config.vm.define "centos" do |centos|
@@ -14,5 +15,6 @@ Vagrant.configure("2") do |config|
       a.limit = "all"
       a.playbook = "tests/test-vagrant.yml"
     end
+    centos.vm.synced_folder ".", "/vagrant", disabled: true
   end
 end
