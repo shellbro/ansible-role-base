@@ -15,6 +15,12 @@
     - tree
     - yum-cron
   become: yes
+- name: install VMware Tools
+  package:
+    name: open-vm-tools
+    state: present
+  when: vmware_tools
+  become: yes
 - name: set hostname
   hostname:
     name: "{{ hostname }}"

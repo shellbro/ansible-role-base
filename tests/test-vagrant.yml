@@ -8,3 +8,4 @@
         supplementary_groups: wheel
       admin_email: admin@example.com
       auto_update: yes
+      vmware_tools: yes

@@ -2,3 +2,4 @@
 hostname: "{{ inventory_hostname }}"
 shell_accounts: []
 auto_update: no
+vmware_tools: no

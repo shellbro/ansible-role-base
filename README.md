@@ -15,6 +15,7 @@ Role Variables
 - shell_accounts (by default empty list)
 - admin_email
 - auto_update (by default no)
+- vmware_tools (by default no)
 
 Dependencies
 ------------
