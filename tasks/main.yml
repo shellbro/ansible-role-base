@@ -32,33 +32,39 @@
     state: present
   with_items: "{{ shell_accounts }}"
   become: yes
-- name: configure aliases
+- name: configure root alias
   lineinfile:
     dest: /etc/aliases
-    line: "root:           {{ admin_email }}"
-    regexp: "^#root:"
-    backrefs: yes
+    regexp: "^#?root:"
+    line: "root: {{ root_alias }}"
+  notify:
+    - run newaliases
+  become: yes
+- name: configure user aliases
+  lineinfile:
+    dest: /etc/aliases
+    regexp: "^#?{{ item.login }}:"
+    line: "{{ item.login }}: {{ item.alias }}"
+  with_items: "{{ shell_accounts }}"
   notify:
     - run newaliases
   become: yes
 - name: configure yum-cron notifications
   lineinfile:
     dest: /etc/yum/yum-cron.conf
+    regexp: "^emit_via ="
     line: emit_via = email
-    regexp: ^emit_via = stdio$
-    backrefs: yes
   notify:
     - restart yum-cron
   become: yes
 - name: configure yum-cron auto-update
   lineinfile:
     dest: /etc/yum/yum-cron.conf
+    regexp: "^apply_updates ="
     line: apply_updates = yes
-    regexp: ^apply_updates = no$
-    backrefs: yes
+  when: auto_update
   notify:
     - restart yum-cron
-  when: auto_update
   become: yes
 - name: start services
   service:

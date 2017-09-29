@@ -13,7 +13,7 @@ Role Variables
 
 - hostname (defaults to {{ inventory_hostname }})
 - shell_accounts (by default empty list)
-- admin_email
+- root_alias
 - auto_update (by default no)
 - vmware_tools (by default no)
 
@@ -32,8 +32,10 @@ Example Playbook
            shell_accounts:
            - login: jsmith
              supplementary_groups: wheel
-           admin_email: admin@example.com
+             alias: admin@example.com
+           root_alias: jsmith
            auto_update: yes
+           vmware_tools: yes
 
 License
 -------

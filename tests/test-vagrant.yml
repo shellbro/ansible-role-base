@@ -6,6 +6,7 @@
       shell_accounts: 
       - login: jsmith
         supplementary_groups: wheel
-      admin_email: admin@example.com
+        alias: admin@example.com
+      root_alias: jsmith
       auto_update: yes
       vmware_tools: yes
