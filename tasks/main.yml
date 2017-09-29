@@ -32,20 +32,20 @@
     state: present
   with_items: "{{ shell_accounts }}"
   become: yes
-- name: configure root alias
-  lineinfile:
-    dest: /etc/aliases
-    regexp: "^#?root:"
-    line: "root: {{ root_alias }}"
-  notify:
-    - run newaliases
-  become: yes
 - name: configure user aliases
   lineinfile:
     dest: /etc/aliases
     regexp: "^#?{{ item.login }}:"
     line: "{{ item.login }}: {{ item.alias }}"
   with_items: "{{ shell_accounts }}"
+  notify:
+    - run newaliases
+  become: yes
+- name: configure root alias
+  lineinfile:
+    dest: /etc/aliases
+    regexp: "^#?root:"
+    line: "root: {{ root_alias }}"
   notify:
     - run newaliases
   become: yes
