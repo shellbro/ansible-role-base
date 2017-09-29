@@ -61,8 +61,7 @@
   lineinfile:
     dest: /etc/yum/yum-cron.conf
     regexp: "^apply_updates ="
-    line: apply_updates = yes
-  when: auto_update
+    line: "apply_updates = {{ auto_update | ternary('yes', 'no') }}"
   notify:
     - restart yum-cron
   become: yes
