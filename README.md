@@ -33,6 +33,9 @@ Example Playbook
            - login: jsmith
              supplementary_groups: wheel
              alias: admin@example.com
+           - login: bot
+             supplementary_groups:
+             alias: root
            root_alias: jsmith
            auto_update: yes
            vmware_tools: yes
