@@ -49,6 +49,12 @@
   notify:
     - run newaliases
   become: yes
+- name: make journal persistent
+  file:
+    path: /var/log/journal
+    state: directory
+  when: persistent_journal
+  become: yes
 - name: configure yum-cron notifications
   lineinfile:
     dest: /etc/yum/yum-cron.conf

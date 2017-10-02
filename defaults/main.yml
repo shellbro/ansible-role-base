@@ -1,5 +1,6 @@
 ---
 hostname: "{{ inventory_hostname }}"
 shell_accounts: []
+persistent_journal: no
 auto_update: no
 vmware_tools: no

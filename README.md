@@ -14,6 +14,7 @@ Role Variables
 - hostname (defaults to {{ inventory_hostname }})
 - shell_accounts (by default empty list)
 - root_alias
+- persistent_journal (by default no)
 - auto_update (by default no)
 - vmware_tools (by default no)
 

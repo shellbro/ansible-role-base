@@ -8,5 +8,6 @@
         supplementary_groups: wheel
         alias: admin@example.com
       root_alias: jsmith
+      persistent_journal: yes
       auto_update: yes
       vmware_tools: yes
