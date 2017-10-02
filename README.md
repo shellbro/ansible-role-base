@@ -38,6 +38,7 @@ Example Playbook
              supplementary_groups:
              alias: root
            root_alias: jsmith
+           persistent_journal: yes
            auto_update: yes
            vmware_tools: yes
 
