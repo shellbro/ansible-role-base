@@ -5,6 +5,7 @@
     state: present
   with_items:
     - bash-completion
+    - hdparm
     - emacs
     - firewalld
     - iftop
