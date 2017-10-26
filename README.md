@@ -1,5 +1,5 @@
-common
-======
+base
+====
 
 Ansible role that provides base configuration for Fedora and CentOS.
 
@@ -28,7 +28,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - role: shellbro.common
+         - role: shellbro.base
            hostname: example.com
            shell_accounts:
            - login: jsmith

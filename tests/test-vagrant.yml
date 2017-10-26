@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - role: shellbro.common
+    - role: shellbro.base
       hostname: example.com
       shell_accounts: 
       - login: jsmith
