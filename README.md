@@ -1,7 +1,7 @@
 base
 ====
 
-Ansible role that provides base configuration for Fedora and CentOS.
+Ansible role that provides base configuration for Fedora and CentOS 7.
 
 Requirements
 ------------
