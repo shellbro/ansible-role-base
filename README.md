@@ -1,6 +1,8 @@
 base
 ====
 
+[![Build Status](https://travis-ci.org/shellbro/ansible-role-base.svg?branch=master)](https://travis-ci.org/shellbro/ansible-role-base)
+
 Ansible role that provides base configuration for Fedora and CentOS 7.
 
 Requirements

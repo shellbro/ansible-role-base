@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vbguest.auto_update = false
   
   config.vm.define "fedora" do |fedora|
-    fedora.vm.box = "fedora/25-cloud-base"
+    fedora.vm.box = "fedora/26-cloud-base"
     fedora.vm.provider "virtualbox" do |v|
       v.cpus = 2
       v.memory = 2048
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
     end
     centos.vm.provision "ansible" do |a|
       a.limit = "all"
-      a.playbook = "tests/test-vagrant.yml"
+      a.playbook = "tests/test.yml"
     end
     centos.vm.synced_folder ".", "/vagrant", disabled: true
   end

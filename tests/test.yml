@@ -1,5 +1,13 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
   roles:
-    - ansible-role-base
+    - role: shellbro.base
+      hostname: example.com
+      shell_accounts: 
+      - login: jsmith
+        supplementary_groups: wheel
+        alias: admin@example.com
+      root_alias: jsmith
+      persistent_journal: yes
+      auto_update: yes
+      vmware_tools: yes
