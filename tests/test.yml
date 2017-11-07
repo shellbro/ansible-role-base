@@ -3,6 +3,7 @@
   roles:
     - role: shellbro.base
       hostname: example.com
+      timezone: Europe/Warsaw
       shell_accounts: 
       - login: jsmith
         supplementary_groups: wheel

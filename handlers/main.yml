@@ -1,4 +1,9 @@
 ---
+- name: restart crond
+  service:
+    name: crond
+    state: restarted
+  become: yes
 - name: run newaliases
   command: /usr/bin/newaliases
   become: yes

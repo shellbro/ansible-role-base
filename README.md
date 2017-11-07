@@ -14,8 +14,9 @@ Role Variables
 --------------
 
 - hostname (defaults to {{ inventory_hostname }})
+- timezone (defaults to UTC)
 - shell_accounts (by default empty list)
-- root_alias
+- root_alias (required)
 - persistent_journal (by default no)
 - auto_update (by default no)
 - vmware_tools (by default no)
@@ -32,6 +33,7 @@ Example Playbook
       roles:
          - role: shellbro.base
            hostname: example.com
+           timezone: Europe/Warsaw
            shell_accounts:
            - login: jsmith
              supplementary_groups: wheel

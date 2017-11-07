@@ -26,6 +26,11 @@
   hostname:
     name: "{{ hostname }}"
   become: yes
+- name: set timezone
+  timezone:
+    name: "{{ timezone }}"
+  notify: restart crond
+  become: yes
 - name: set up user accounts
   user:
     name: "{{ item.login }}"
