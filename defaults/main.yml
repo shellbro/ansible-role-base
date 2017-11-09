@@ -1,5 +1,5 @@
 ---
-hostname: "{{ inventory_hostname }}"
+hostname: '{{ inventory_hostname }}'
 timezone: UTC
 shell_accounts: []
 persistent_journal: no

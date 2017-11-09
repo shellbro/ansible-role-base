@@ -1,7 +1,7 @@
 ---
 - name: install required software
   package:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - bash-completion
@@ -24,36 +24,38 @@
   become: yes
 - name: set hostname
   hostname:
-    name: "{{ hostname }}"
+    name: '{{ hostname }}'
   become: yes
 - name: set timezone
   timezone:
-    name: "{{ timezone }}"
-  notify: restart crond
+    name: '{{ timezone }}'
+  notify: restart crond service
   become: yes
 - name: set up user accounts
   user:
-    name: "{{ item.login }}"
-    groups: "{{ item.supplementary_groups }}"
+    name: '{{ item.login }}'
+    groups: '{{ item.supplementary_groups }}'
     state: present
-  with_items: "{{ shell_accounts }}"
+  with_items: '{{ shell_accounts }}'
   become: yes
 - name: configure user aliases
   lineinfile:
-    dest: /etc/aliases
-    regexp: "^#?{{ item.login }}:"
-    line: "{{ item.login }}: {{ item.alias }}"
-  with_items: "{{ shell_accounts }}"
+    path: /etc/aliases
+    regexp: '^{{ item.login }}:'
+    insertafter: '^#{{ item.login }}:'
+    line: '{{ item.login }}: {{ item.alias }}'
+  with_items: '{{ shell_accounts }}'
   notify:
-    - run newaliases
+    - run newaliases command
   become: yes
 - name: configure root alias
   lineinfile:
-    dest: /etc/aliases
-    regexp: "^#?root:"
-    line: "root: {{ root_alias }}"
+    path: /etc/aliases
+    regexp: '^root:'
+    insertafter: '^#root:'
+    line: 'root: {{ root_alias }}'
   notify:
-    - run newaliases
+    - run newaliases command
   become: yes
 - name: make journal persistent
   file:
@@ -63,23 +65,23 @@
   become: yes
 - name: configure yum-cron notifications
   lineinfile:
-    dest: /etc/yum/yum-cron.conf
-    regexp: "^emit_via ="
+    path: /etc/yum/yum-cron.conf
+    regexp: ^emit_via =
     line: emit_via = email
   notify:
-    - restart yum-cron
+    - restart yum-cron service
   become: yes
 - name: configure yum-cron auto-update
   lineinfile:
-    dest: /etc/yum/yum-cron.conf
-    regexp: "^apply_updates ="
-    line: "apply_updates = {{ auto_update | ternary('yes', 'no') }}"
+    path: /etc/yum/yum-cron.conf
+    regexp: ^apply_updates =
+    line: 'apply_updates = {{ auto_update | ternary("yes", "no") }}'
   notify:
-    - restart yum-cron
+    - restart yum-cron service
   become: yes
-- name: start services
+- name: start and enable services
   service:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: started
     enabled: yes
   with_items:

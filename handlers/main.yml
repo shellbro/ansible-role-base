@@ -1,13 +1,13 @@
 ---
-- name: restart crond
+- name: restart crond service
   service:
     name: crond
     state: restarted
   become: yes
-- name: run newaliases
+- name: run newaliases command
   command: /usr/bin/newaliases
   become: yes
-- name: restart yum-cron
+- name: restart yum-cron service
   service:
     name: yum-cron
     state: restarted
