@@ -4,6 +4,7 @@
     - role: shellbro.base
       hostname: example.com
       timezone: Europe/Warsaw
+      ntp_client: yes
       shell_accounts: 
       - login: jsmith
         supplementary_groups: wheel

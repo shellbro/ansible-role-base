@@ -17,6 +17,12 @@
     - tree
     - yum-cron
   become: yes
+- name: install chrony
+  package:
+    name: chrony
+    state: present
+  when: ntp_client
+  become: yes
 - name: install VMware Tools
   package:
     name: open-vm-tools
@@ -80,7 +86,7 @@
   notify:
     - restart yum-cron service
   become: yes
-- name: start and enable services
+- name: start and enable basic services
   service:
     name: '{{ item }}'
     state: started
@@ -89,4 +95,11 @@
     - firewalld
     - postfix
     - yum-cron
+  become: yes
+- name: start and enable chronyd service
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+  when: ntp_client
   become: yes

@@ -15,6 +15,7 @@ Role Variables
 
 - hostname (defaults to {{ inventory_hostname }})
 - timezone (defaults to UTC)
+- ntp_client (by default no)
 - shell_accounts (by default empty list)
 - root_alias (required)
 - persistent_journal (by default no)
@@ -34,6 +35,7 @@ Example Playbook
          - role: shellbro.base
            hostname: example.com
            timezone: Europe/Warsaw
+           ntp_client: yes
            shell_accounts:
            - login: jsmith
              supplementary_groups: wheel
