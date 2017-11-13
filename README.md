@@ -15,12 +15,12 @@ Role Variables
 
 - hostname (defaults to {{ inventory_hostname }})
 - timezone (defaults to UTC)
-- ntp_client (by default no)
+- ntp_client - force time synchronization with NTP (by default no)
 - shell_accounts (by default empty list)
 - root_alias (required)
-- persistent_journal (by default no)
-- auto_update (by default no)
-- vmware_tools (by default no)
+- persistent_journal - force persistent journal (by default no)
+- auto_update - whether OS updates should be applied automatically (by default no)
+- vmware_tools - force installation of VMWare Tools (by default no)
 
 Dependencies
 ------------

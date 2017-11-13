@@ -1,5 +1,5 @@
 ---
-- name: install required software
+- name: install basic software
   package:
     name: '{{ item }}'
     state: present
