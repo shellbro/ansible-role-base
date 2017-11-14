@@ -32,21 +32,21 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - role: shellbro.base
-           hostname: example.com
-           timezone: Europe/Warsaw
-           ntp_client: yes
-           shell_accounts:
-           - login: jsmith
-             supplementary_groups: wheel
-             alias: admin@example.com
-           - login: bot
-             supplementary_groups:
-             alias: root
-           root_alias: jsmith
-           persistent_journal: yes
-           auto_update: yes
-           vmware_tools: yes
+        - role: shellbro.base
+          hostname: example.com
+          timezone: Europe/Warsaw
+          ntp_client: yes
+          shell_accounts:
+          - login: jsmith
+            supplementary_groups: wheel
+            alias: admin@example.com
+          - login: bot
+            supplementary_groups:
+            alias: root
+          root_alias: jsmith
+          persistent_journal: yes
+          auto_update: yes
+          vmware_tools: yes
 
 License
 -------
