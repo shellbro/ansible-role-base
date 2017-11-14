@@ -52,8 +52,7 @@
     insertafter: '^#{{ item.login }}:'
     line: '{{ item.login }}: {{ item.alias }}'
   with_items: '{{ shell_accounts }}'
-  notify:
-    - run newaliases command
+  notify: run newaliases command
   become: yes
 - name: configure root alias
   lineinfile:
@@ -61,8 +60,7 @@
     regexp: '^root:'
     insertafter: '^#root:'
     line: 'root: {{ root_alias }}'
-  notify:
-    - run newaliases command
+  notify: run newaliases command
   become: yes
 - name: make journal persistent
   file:
@@ -75,16 +73,14 @@
     path: /etc/yum/yum-cron.conf
     regexp: ^emit_via =
     line: emit_via = email
-  notify:
-    - restart yum-cron service
+  notify: restart yum-cron service
   become: yes
 - name: configure yum-cron auto-update
   lineinfile:
     path: /etc/yum/yum-cron.conf
     regexp: ^apply_updates =
     line: 'apply_updates = {{ auto_update | ternary("yes", "no") }}'
-  notify:
-    - restart yum-cron service
+  notify: restart yum-cron service
   become: yes
 - name: start and enable basic services
   service:
