@@ -7,13 +7,13 @@
     - bash-completion
     - bind-utils
     - hdparm
+    - httpie
     - emacs
     - firewalld
     - iftop
     - iotop
     - mailx
     - postfix
-    - python2-httpie
     - python2-speedtest-cli
     - tree
     - yum-cron
