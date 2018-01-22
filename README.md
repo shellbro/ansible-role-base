@@ -13,19 +13,19 @@ Ansible version >= 2.3.
 Role Variables
 --------------
 
-- hostname (defaults to {{ inventory_hostname }})
-- timezone (defaults to UTC)
-- ntp_client - force time synchronization with NTP (by default no)
-- shell_accounts (by default empty list)
-- root_alias (required)
-- persistent_journal - force persistent journal (by default no)
-- auto_update - whether OS updates should be applied automatically (by default no)
-- vmware_tools - force installation of VMWare Tools (by default no)
+* hostname (defaults to {{ inventory_hostname }})
+* timezone (defaults to UTC)
+* ntp_client - force time synchronization with NTP (by default no)
+* shell_accounts (by default empty list)
+* root_alias (required)
+* persistent_journal - force persistent journal (by default no)
+* auto_update - whether OS updates should be applied automatically (by default no)
+* vmware_tools - force installation of VMWare Tools (by default no)
 
 Dependencies
 ------------
 
-- shellbro.epel
+* shellbro.epel
 
 Example Playbook
 ----------------
