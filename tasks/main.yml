@@ -13,6 +13,7 @@
     - iftop
     - iotop
     - mailx
+    - nmap-ncat
     - postfix
     - python2-speedtest-cli
     - tree
