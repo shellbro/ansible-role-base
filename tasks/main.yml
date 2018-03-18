@@ -8,7 +8,6 @@
     - bind-utils
     - hdparm
     - httpie
-    - emacs
     - firewalld
     - iftop
     - iotop
