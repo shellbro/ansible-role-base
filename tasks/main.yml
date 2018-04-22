@@ -7,7 +7,6 @@
     - bash-completion
     - bind-utils
     - hdparm
-    - httpie
     - firewalld
     - iftop
     - iotop
