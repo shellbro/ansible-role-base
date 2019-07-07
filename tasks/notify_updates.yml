@@ -6,6 +6,7 @@
 
 - name: Configure yum-cron
   lineinfile:
+    create: true
     line: emit_via = email
     path: /etc/yum/yum-cron.conf
     regexp: ^emit_via =
