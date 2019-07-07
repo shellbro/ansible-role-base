@@ -3,29 +3,28 @@ base
 
 [![Build Status](https://travis-ci.org/shellbro/ansible-role-base.svg?branch=master)](https://travis-ci.org/shellbro/ansible-role-base)
 
-Ansible role that provides base configuration for Fedora and CentOS 7.
+Ansible role for baseline configuration of CentOS 7
 
 Requirements
 ------------
 
-Ansible version >= 2.3.
+Ansible version >= 2.7
 
 Role Variables
 --------------
 
-* hostname (defaults to {{ inventory_hostname }})
+* hostname (defaults to `inventory_hostname`)
 * timezone (defaults to UTC)
-* ntp_client - force time synchronization with NTP (by default no)
-* shell_accounts (by default empty list)
-* root_alias (required)
-* persistent_journal - force persistent journal (by default no)
-* auto_update - whether OS updates should be applied automatically (by default no)
-* vmware_tools - force installation of VMWare Tools (by default no)
+* persistent_journal - configure persistent journal (by default yes)
+* root_email_alias - if provided, email address to forward root messages to
+* ntp_client - configure NTP time synchronization (by default yes)
+* notify_updates - if set to yes, email notifications are sent to root when
+package updates become available (by default yes)
 
 Dependencies
 ------------
 
-* shellbro.epel
+None
 
 Example Playbook
 ----------------
@@ -35,18 +34,7 @@ Example Playbook
         - role: shellbro.base
           hostname: example.com
           timezone: Europe/Warsaw
-          ntp_client: yes
-          shell_accounts:
-          - login: jsmith
-            supplementary_groups: wheel
-            alias: admin@example.com
-          - login: bot
-            supplementary_groups:
-            alias: root
-          root_alias: jsmith
-          persistent_journal: yes
-          auto_update: yes
-          vmware_tools: yes
+          root_alias: email@example.com
 
 License
 -------
