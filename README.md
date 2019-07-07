@@ -15,11 +15,11 @@ Role Variables
 
 * hostname (defaults to `inventory_hostname`)
 * timezone (defaults to UTC)
-* persistent_journal - configure persistent journal (by default yes)
+* persistent_journal - configure persistent journal (by default true)
 * root_email_alias - if provided, email address to forward root messages to
-* ntp_client - configure NTP time synchronization (by default yes)
-* notify_updates - if set to yes, email notifications are sent to root when
-package updates become available (by default yes)
+* ntp_client - configure NTP time synchronization (by default true)
+* notify_updates - if set to true, email notifications are sent to root when
+package updates become available (by default true)
 
 Dependencies
 ------------
