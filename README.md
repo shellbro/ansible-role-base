@@ -34,7 +34,7 @@ Example Playbook
         - role: shellbro.base
           hostname: example.com
           timezone: Europe/Warsaw
-          root_alias: email@example.com
+          root_email_alias: email@example.com
 
 License
 -------
