@@ -1,0 +1,15 @@
+---
+- name: Install chrony
+  yum:
+    name: chrony
+  become: true
+  when: ntp_client
+
+- name: Start and enable chronyd service
+  tags: notest
+  service:
+    enabled: true
+    name: chronyd
+    state: started
+  become: ntp_client
+  when: ntp_client

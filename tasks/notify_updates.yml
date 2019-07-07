@@ -1,0 +1,21 @@
+---
+- name: Install yum-cron
+  yum:
+    name: yum-cron
+  become: true
+
+- name: Configure yum-cron
+  lineinfile:
+    line: emit_via = email
+    path: /etc/yum/yum-cron.conf
+    regexp: ^emit_via =
+  become: true
+  notify: Restart yum-cron service
+
+- name: Start and enable yum-cron service
+  tags: notest
+  service:
+    enabled: true
+    name: yum-cron
+    state: started
+  become: true

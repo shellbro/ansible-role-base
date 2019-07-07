@@ -1,96 +1,60 @@
 ---
-- name: install basic software
-  package:
-    name: '{{ item }}'
-    state: present
-  with_items:
-    - bash-completion
-    - bind-utils
-    - firewalld
-    - mailx
-    - postfix
-    - tree
-    - yum-cron
-  become: yes
-- name: install chrony
-  package:
-    name: chrony
-    state: present
-  when: ntp_client
-  become: yes
-- name: install VMware Tools
-  package:
-    name: open-vm-tools
-    state: present
-  when: vmware_tools
-  become: yes
-- name: set hostname
+- name: Set hostname
+  tags: notest
   hostname:
-    name: '{{ hostname }}'
-  become: yes
-- name: set timezone
+    name: "{{ hostname }}"
+  become: true
+  notify: Reboot machine
+
+- name: Set timezone
+  tags: notest
   timezone:
-    name: '{{ timezone }}'
-  notify: restart crond service
-  become: yes
-- name: set up user accounts
-  user:
-    name: '{{ item.login }}'
-    groups: '{{ item.supplementary_groups }}'
-    state: present
-  with_items: '{{ shell_accounts }}'
-  become: yes
-- name: configure user aliases
-  lineinfile:
-    path: /etc/aliases
-    regexp: '^{{ item.login }}:'
-    insertafter: '^#{{ item.login }}:'
-    line: '{{ item.login }}: {{ item.alias }}'
-  with_items: '{{ shell_accounts }}'
-  notify: run newaliases command
-  become: yes
-- name: configure root alias
-  lineinfile:
-    path: /etc/aliases
-    regexp: '^root:'
-    insertafter: '^#root:'
-    line: 'root: {{ root_alias }}'
-  notify: run newaliases command
-  become: yes
-- name: make journal persistent
+    name: "{{ timezone }}"
+  become: true
+  notify: Reboot machine
+
+- name: Make journal persistent
   file:
     path: /var/log/journal
     state: directory
+  become: true
+  notify: Reboot machine
   when: persistent_journal
-  become: yes
-- name: configure yum-cron notifications
-  lineinfile:
-    path: /etc/yum/yum-cron.conf
-    regexp: ^emit_via =
-    line: emit_via = email
-  notify: restart yum-cron service
-  become: yes
-- name: configure yum-cron auto-update
-  lineinfile:
-    path: /etc/yum/yum-cron.conf
-    regexp: ^apply_updates =
-    line: 'apply_updates = {{ auto_update | ternary("yes", "no") }}'
-  notify: restart yum-cron service
-  become: yes
-- name: start and enable basic services
+
+- name: Install basic packages
+  yum:
+    name:
+      - bash-completion
+      - firewalld
+      - mailx
+      - postfix
+  become: true
+
+- name: Start and enable basic services
+  tags: notest
   service:
-    name: '{{ item }}'
+    enabled: true
+    name: "{{ item }}"
     state: started
-    enabled: yes
   with_items:
     - firewalld
     - postfix
-    - yum-cron
-  become: yes
-- name: start and enable chronyd service
-  service:
-    name: chronyd
-    state: started
-    enabled: yes
+  become: true
+
+- name: Configure root email alias
+  lineinfile:
+    insertafter: ^#root
+    line: "root: {{ root_email_alias }}"
+    path: /etc/aliases
+    regexp: "^root:"
+  become: true
+  notify: Run newaliases command
+  when: root_email_alias is defined
+
+- name: Import ntp_client.yml
+  import_tasks: ntp_client.yml
   when: ntp_client
-  become: yes
+
+- name: Import notify_updates.yml
+  import_tasks: notify_updates.yml
+  when: notify_updates

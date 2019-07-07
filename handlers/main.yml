@@ -1,14 +1,17 @@
 ---
-- name: restart crond service
-  service:
-    name: crond
-    state: restarted
-  become: yes
-- name: run newaliases command
+- name: Run newaliases command
   command: /usr/bin/newaliases
-  become: yes
-- name: restart yum-cron service
+  become: true
+  when: notest is not defined
+
+- name: Restart yum-cron service
   service:
     name: yum-cron
     state: restarted
-  become: yes
+  become: true
+  when: notest is not defined
+
+- name: Reboot machine
+  reboot:
+  become: true
+  when: notest is not defined
